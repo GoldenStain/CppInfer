@@ -18,9 +18,14 @@ static __global__ void row_rmsnorm_f32(float* in, float* wei, float* out, int si
     sum += in_float4.z * in_float4.z;
     sum += in_float4.w * in_float4.w;
   }
-
-  for (int i = pack_off + tid; i < size; i += blockDim.x) {
-    sum += in[i] * in[i];
+  // 那些不能构成一个完整pack的部分，会被单独处理
+  //  for (int i = pack_off + tid; i < size; i += blockDim.x) {
+  //    sum += in[i] * in[i];
+  //  }
+  // 可以写成这样：
+  if (tid < size - pack_off) {
+    // size从1开始,tid从0开始,所以这里不是<=而是<
+    sum += in[tid + pack_off] * in[tid + pack_off];
   }
 
   using BlockReduce = cub::BlockReduce<float, BLOCK_DIM>;

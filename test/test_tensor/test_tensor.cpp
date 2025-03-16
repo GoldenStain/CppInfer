@@ -13,6 +13,7 @@ TEST(test_tensor, to_cpu) {
   set_value_cu(t1_cu.ptr<float>(), 32 * 32);
 
   t1_cu.to_cpu();
+  tensor::Tensor t2 = t1_cu;
   ASSERT_EQ(t1_cu.device_type(), base::DeviceType::kDeviceCPU);
   float* cpu_ptr = t1_cu.ptr<float>();
   for (int i = 0; i < 32 * 32; ++i) {
