@@ -49,8 +49,12 @@ static __global__ void row_rmsnorm_f32(float* in, float* wei, float* out, int si
                     scale * in_float4.z * wei_float4.z, scale * in_float4.w * wei_float4.w);
   }
 
-  for (int i = pack_off + tid; i < size; i += blockDim.x) {
-    out[i] = wei[i] * in[i] * scale;
+  //  for (int i = pack_off + tid; i < size; i += blockDim.x) {
+  //    out[i] = wei[i] * in[i] * scale;
+  //  }
+  // 同理进行改写
+  if (tid < size - pack_off) {
+    out[tid + pack_off] = wei[tid + pack_off] * in[tid + pack_off] * scale;
   }
 }
 
