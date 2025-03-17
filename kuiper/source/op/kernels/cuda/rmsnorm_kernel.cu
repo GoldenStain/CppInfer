@@ -37,6 +37,7 @@ static __global__ void row_rmsnorm_f32(float* in, float* wei, float* out, int si
   }
   __syncthreads();
   sum = shared_val;
+  // 这里来回赋值并不是多此一举，我们通过shared_val保证sum的值被广播到了每一个线程，这里如果删去该逻辑会导致结果出错。
   const float scale = rsqrtf(sum / static_cast<float>(size) + eps);
 
   float4* wei_pack = reinterpret_cast<float4*>(wei);
