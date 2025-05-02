@@ -36,7 +36,7 @@
 
 `numpy`给出的实现是这样：
 
-$ Ans = input \cdot weight^T $
+$`Ans = input \cdot weight^T`$
 
 这里的`input`是一个行向量。
 
