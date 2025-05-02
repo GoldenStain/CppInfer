@@ -5,7 +5,7 @@
 
 在学习中，我们通常把向量写成列向量的形式，例如，这是一个典型的GEMV公式：
 
-\[
+```math
 
 \begin{bmatrix}
 1 & 2 & 3 \\
@@ -24,7 +24,7 @@
 24
 \end{bmatrix}
 
-\]
+```
 
 ### GPU算子
 
@@ -44,7 +44,7 @@ $ Ans = input \cdot weight^T $
 
 所以，我们的CPU算子计算过程应该是这样的：
 
-$$
+```math
 
 \begin{bmatrix}
 1 & 1 & 1
@@ -59,7 +59,7 @@ $$
 6 & 15 & 24
 \end{bmatrix}
 
-$$
+```
 
 ### 总结
 
