@@ -10,9 +10,9 @@ struct EmbeddingOutput {
   tensor::Tensor input_token_num;
   explicit EmbeddingOutput(tensor::Tensor input_tokens, tensor::Tensor input_embeddings,
                            tensor::Tensor input_token_num)
-      : input_tokens(std::move(input_tokens)),
-        input_embeddings(std::move(input_embeddings)),
-        input_token_num(std::move(input_token_num)) {}
+      : input_tokens(std::move(input_tokens)), // 原始输入token的索引序列
+        input_embeddings(std::move(input_embeddings)), // 输入token对应的嵌入向量
+        input_token_num(std::move(input_token_num)) {} // 每个样本中有效token的实际数量
 };
 
 class EmbeddingLayer : public LayerParam {
